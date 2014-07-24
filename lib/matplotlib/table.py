@@ -533,7 +533,7 @@ def table(ax,
     # Add the cells
     for row in xrange(rows):
         for col in xrange(cols):
-            table.add_cell(row + offset, col,
+            table.add_cell(row, col,
                            width=colWidths[col], height=height,
                            text=cellText[row][col],
                            facecolor=cellColours[row][col],
@@ -541,20 +541,31 @@ def table(ax,
     # Do column labels
     if colLabels is not None:
         for col in xrange(cols):
-            table.add_cell(0, col,
+            #print("loool")
+            table.add_cell(rows, col,
                            width=colWidths[col], height=height,
                            text=colLabels[col], facecolor=colColours[col],
                            loc=colLoc)
 
+
+    if rowLabels is not None:
+        for row in xrange(rows):
+            table.add_cell(row,3, width= colWidths[0], height=height,text=rowLabels[row], facecolor=colColours[0],
+                           loc=colLoc)
+
+    """
     # Do row labels
     if rowLabels is not None:
         for row in xrange(rows):
-            table.add_cell(row + offset, -1,
+            print(rowColours[row])
+            print(rowLabels[row])
+            table.add_cell(row, -1,
                            width=rowLabelWidth or 1e-15, height=height,
                            text=rowLabels[row], facecolor=rowColours[row],
                            loc=rowLoc)
         if rowLabelWidth == 0:
             table.auto_set_column_width(-1)
+    """
 
     ax.add_table(table)
     return table
