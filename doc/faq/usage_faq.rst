@@ -114,6 +114,27 @@ idea).  When the figure is rendered, all of the artists are drawn to
 the **canvas**.  Most Artists are tied to an Axes; such an Artist
 cannot be shared by multiple Axes, or moved from one to another.
 
+.. _input_types:
+
+Types of inputs to plotting functions
+=====================================
+
+All of plotting functions expect `np.array` or `np.ma.masked_array` as
+input.  Classes that are 'array-like' such as `pandas` data objects
+and `np.matrix` may or may not work as intended.  It is best to
+convert these to `np.array` objects prior to plotting.
+
+For example, to covert a `pandas.DataFrame` ::
+
+  a = pandas.DataFrame(np.random.rand(4,5), columns = list('abcde'))
+  a_asndarray = a.values
+
+and to covert a `np.matrix` ::
+
+  b = np.matrix([[1,2],[3,4]])
+  b_asarray = np.asarray(b)
+
+
 
 .. _pylab:
 
@@ -382,7 +403,7 @@ macosx         Cocoa rendering in OSX windows
                is in non-interactive mode)
 ============   ================================================================
 
-.. _`Anti-Grain Geometry`: http://www.antigrain.com/
+.. _`Anti-Grain Geometry`: http://agg.sourceforge.net/antigrain.com/index.html
 .. _Postscript: http://en.wikipedia.org/wiki/PostScript
 .. _`Portable Document Format`: http://en.wikipedia.org/wiki/Portable_Document_Format
 .. _`Scalable Vector Graphics`: http://en.wikipedia.org/wiki/Scalable_Vector_Graphics

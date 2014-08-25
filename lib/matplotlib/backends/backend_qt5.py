@@ -125,13 +125,13 @@ def _create_qApp():
     """
     Only one qApp can exist at a time, so check before creating one.
     """
-    if QtWidgets.QApplication.startingUp():
+    global qApp
+
+    if qApp is None:
         if DEBUG:
             print("Starting up QApplication")
-        global qApp
         app = QtWidgets.QApplication.instance()
         if app is None:
-
             # check for DISPLAY env variable on X11 build of Qt
             if hasattr(QtGui, "QX11Info"):
                 display = os.environ.get('DISPLAY')
@@ -381,7 +381,7 @@ class FigureCanvasQT(QtWidgets.QWidget, FigureCanvasBase):
                 key = key.lower()
 
         mods.reverse()
-        return u'+'.join(mods + [key])
+        return '+'.join(mods + [key])
 
     def new_timer(self, *args, **kwargs):
         """
@@ -610,8 +610,8 @@ class NavigationToolbar2QT(NavigationToolbar2, QtWidgets.QToolBar):
             self.locLabel.setAlignment(
                     QtCore.Qt.AlignRight | QtCore.Qt.AlignTop)
             self.locLabel.setSizePolicy(
-                QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding,
-                                  QtGui.QSizePolicy.Ignored))
+                QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding,
+                                  QtWidgets.QSizePolicy.Ignored))
             labelAction = self.addWidget(self.locLabel)
             labelAction.setVisible(True)
 
