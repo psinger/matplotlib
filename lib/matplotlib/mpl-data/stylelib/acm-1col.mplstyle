@@ -45,3 +45,4 @@ axes3d.grid         : True    # display grid on 3d axes
 
 legend.fancybox      : True  # if True, use a rounded box for the
                                # legend, else a rectangle
+legend.fontsize = 8.0
